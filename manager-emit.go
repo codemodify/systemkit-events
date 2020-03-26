@@ -1,7 +1,7 @@
 package events
 
-// Raise - informs all subscribers about the event
-func (thisRef *Manager) Raise(eventName string) {
+// Emit - informs all subscribers about the event
+func (thisRef *Manager) Emit(eventName string) {
 	thisRef.eventsMutex.RLock()
 	defer thisRef.eventsMutex.RUnlock()
 
@@ -13,8 +13,8 @@ func (thisRef *Manager) Raise(eventName string) {
 	thisRef.removeAllCallOnce(eventName)
 }
 
-// RaiseWithData - informs all subscribers about the event with data
-func (thisRef *Manager) RaiseWithData(eventName string, data []byte) {
+// EmitWithData - informs all subscribers about the event with data
+func (thisRef *Manager) EmitWithData(eventName string, data []byte) {
 	thisRef.eventsMutex.RLock()
 	defer thisRef.eventsMutex.RUnlock()
 

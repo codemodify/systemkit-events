@@ -17,7 +17,7 @@ func Test_RaiseData_OnData_OnNoData(t *testing.T) {
 	go func() {
 		for {
 			time.Sleep(1 * time.Second)
-			events.Events().RaiseWithData(pingEvent, []byte(pingData))
+			events.Events().EmitWithData(pingEvent, []byte(pingData))
 		}
 	}()
 
