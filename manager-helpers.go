@@ -52,7 +52,7 @@ func (thisRef *Manager) addSubscriberWithDataIfNotExists(eventName string, event
 	var alreadyThere = false
 
 	for _, existingEventHandler := range thisRef.events[eventName].subscribersWithData {
-		alreadyThere = (reflect.ValueOf(eventHandlerWithData) == reflect.ValueOf(existingEventHandler))
+		alreadyThere = (reflect.ValueOf(eventHandlerWithData) == reflect.ValueOf(existingEventHandler.EventHandler))
 		if alreadyThere {
 			break
 		}
