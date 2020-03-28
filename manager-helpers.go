@@ -24,7 +24,7 @@ func (thisRef *Manager) addSubscriberIfNotExists(eventName string, eventHandler 
 	var alreadyThere = false
 
 	for _, existingEventHandler := range thisRef.events[eventName].subscribers {
-		alreadyThere = (reflect.ValueOf(eventHandler) == reflect.ValueOf(existingEventHandler))
+		alreadyThere = (reflect.ValueOf(eventHandler) == reflect.ValueOf(existingEventHandler.EventHandler))
 		if alreadyThere {
 			break
 		}
