@@ -126,14 +126,15 @@ func main() {
 
 	handler1CallOnce := true
 	events.Events().On("PING", func() {
-		// FIMXE: will be called ONCE
+		// FIXME: will be called ONCE
 	}, handler1CallOnce)
 
 	handler3CallOnce := false
 	events.Events().On("PING", func() {
-		// FIMXE: will be called UNTIL "events.Events().Off()" is called
+		// FIXME: will be called UNTIL "events.Events().Off()" is called
 	}, handler3CallOnce)
 
 	events.Events().Emit("PING")
 }
 ```
+> #### For examples see `tests`
