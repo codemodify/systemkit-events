@@ -1,5 +1,7 @@
 package events
 
+import "encoding/json"
+
 // Emit - informs all subscribers about the event
 func (thisRef *Manager) Emit(eventName string) {
 	thisRef.eventsMutex.RLock()
@@ -14,7 +16,7 @@ func (thisRef *Manager) Emit(eventName string) {
 }
 
 // EmitWithData - informs all subscribers about the event with data
-func (thisRef *Manager) EmitWithData(eventName string, data []byte) {
+func (thisRef *Manager) EmitWithData(eventName string, data []byte, autoMarshal ...bool) {
 	thisRef.eventsMutex.RLock()
 	defer thisRef.eventsMutex.RUnlock()
 
@@ -24,6 +26,18 @@ func (thisRef *Manager) EmitWithData(eventName string, data []byte) {
 	thisRef.raiseHelper(eventName)
 
 	thisRef.removeAllCallOnce(eventName)
+}
+
+// EmitWithDataM - marshal data and informs all subscribers about the event with data
+func (thisRef *Manager) EmitWithDataM(eventName string, structAsInterface interface{}) error {
+	structAsBytes, err := json.Marshal(structAsInterface)
+	if err != nil {
+		return err
+	}
+
+	thisRef.EmitWithData(eventName, structAsBytes)
+
+	return nil
 }
 
 func (thisRef *Manager) raiseHelper(eventName string) {
