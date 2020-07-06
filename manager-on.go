@@ -2,8 +2,8 @@ package events
 
 // On - add a subscriber for an event
 func (thisRef *Manager) On(eventName string, eventHandler Handler, callOnce ...bool) {
-	thisRef.eventsMutex.RLock()
-	defer thisRef.eventsMutex.RUnlock()
+	thisRef.eventsMutex.Lock()
+	defer thisRef.eventsMutex.Unlock()
 
 	shouldCallOnce := false
 	if len(callOnce) > 0 {
@@ -16,8 +16,8 @@ func (thisRef *Manager) On(eventName string, eventHandler Handler, callOnce ...b
 
 // OnWithData - add a subscriber with data for an event
 func (thisRef *Manager) OnWithData(eventName string, eventHandlerWithData HandlerWithData, callOnce ...bool) {
-	thisRef.eventsMutex.RLock()
-	defer thisRef.eventsMutex.RUnlock()
+	thisRef.eventsMutex.Lock()
+	defer thisRef.eventsMutex.Unlock()
 
 	shouldCallOnce := false
 	if len(callOnce) > 0 {

@@ -4,8 +4,8 @@ import "encoding/json"
 
 // Emit - informs all subscribers about the event
 func (thisRef *Manager) Emit(eventName string) {
-	thisRef.eventsMutex.RLock()
-	defer thisRef.eventsMutex.RUnlock()
+	thisRef.eventsMutex.Lock()
+	defer thisRef.eventsMutex.Unlock()
 
 	thisRef.addEventIfNotExists(eventName)
 
@@ -17,8 +17,8 @@ func (thisRef *Manager) Emit(eventName string) {
 
 // EmitWithData - informs all subscribers about the event with data
 func (thisRef *Manager) EmitWithData(eventName string, data []byte, autoMarshal ...bool) {
-	thisRef.eventsMutex.RLock()
-	defer thisRef.eventsMutex.RUnlock()
+	thisRef.eventsMutex.Lock()
+	defer thisRef.eventsMutex.Unlock()
 
 	thisRef.addEventIfNotExists(eventName)
 

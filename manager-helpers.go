@@ -17,8 +17,8 @@ func (thisRef *Manager) addEventIfNotExists(eventName string) {
 }
 
 func (thisRef *Manager) addSubscriberIfNotExists(eventName string, eventHandler Handler, shouldCallOnce bool) bool {
-	// thisRef.eventsMutex.RLock()
-	// defer thisRef.eventsMutex.RUnlock()
+	// thisRef.eventsMutex.Lock()
+	// defer thisRef.eventsMutex.Unlock()
 
 	// 1. Check if delegate for the event already there, assumes map-key exists
 	var alreadyThere = false
@@ -45,8 +45,8 @@ func (thisRef *Manager) addSubscriberIfNotExists(eventName string, eventHandler 
 }
 
 func (thisRef *Manager) addSubscriberWithDataIfNotExists(eventName string, eventHandlerWithData HandlerWithData, shouldCallOnce bool) bool {
-	// thisRef.eventsMutex.RLock()
-	// defer thisRef.eventsMutex.RUnlock()
+	// thisRef.eventsMutex.Lock()
+	// defer thisRef.eventsMutex.Unlock()
 
 	// 1. Check if delegate for the event already there, assumes map-key exists
 	var alreadyThere = false

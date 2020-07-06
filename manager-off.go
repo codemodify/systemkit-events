@@ -6,8 +6,8 @@ import (
 
 // Off - remove a subscriber for an event
 func (thisRef *Manager) Off(eventName string, eventHandler Handler) {
-	thisRef.eventsMutex.RLock()
-	defer thisRef.eventsMutex.RUnlock()
+	thisRef.eventsMutex.Lock()
+	defer thisRef.eventsMutex.Unlock()
 
 	thisRef.addEventIfNotExists(eventName)
 
@@ -16,8 +16,8 @@ func (thisRef *Manager) Off(eventName string, eventHandler Handler) {
 
 // OffWithData - remove a subscriber with data for an event
 func (thisRef *Manager) OffWithData(eventName string, eventHandlerWithData HandlerWithData) {
-	thisRef.eventsMutex.RLock()
-	defer thisRef.eventsMutex.RUnlock()
+	thisRef.eventsMutex.Lock()
+	defer thisRef.eventsMutex.Unlock()
 
 	thisRef.addEventIfNotExists(eventName)
 
